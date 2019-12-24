@@ -13,7 +13,9 @@ class SearchBar extends Component {
         //change state by using "setState"
         return (
             <div>
-                <input onChange={event=>this.setState({term:event.target.value })} />;
+                <input 
+                    value={this.state.term}
+                    onChange={event=>this.setState({term:event.target.value })} />;
             </div>
        
         );   
