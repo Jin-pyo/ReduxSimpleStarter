@@ -17,7 +17,11 @@ class App extends Component {
             selectVideo:null
         };
 
-        YTSearch({key:API_KEY,term:'surfboards'},(videos)=>{
+        this.videoSearch('surfboards');
+    }
+
+    videoSearch(term){
+        YTSearch({key:API_KEY, term:term},(videos)=>{
             //this.setState({videos:data});
             this.setState({
                 videos:videos,  //when name is smae 위 이름이랑
@@ -26,11 +30,10 @@ class App extends Component {
         });
     }
 
-
     render(){
         return (
             <div>
-                <SearchBar />
+                <SearchBar onSearchTermChange={term=>this.videoSearch(term)} />
                 <VideoDetail video={this.state.selectVideo} />
                 <VideoList 
                     onVideoSelect={selectVideo=>this.setState({selectVideo})}
