@@ -1,18 +1,34 @@
-import React from 'react';
+import React,{ Component } from 'react';
 import ReactDOM from 'react-dom';
-
+import YTSearch from 'youtube-api-search';
 import SearchBar from './components/search_bar';
-
+import VideoList from './components/video_list';
 const API_KEY = 'AIzaSyCM6zyhejrZ98f41tVS3Qvr5Zz1Ri1l_2s';
 
 // Create a new componetn. this component should produce
 // some HTML
-const App = ()=>{ //App is functional componet because it dodesn't have any concept of state
-    return (
-        <div>
-            <SearchBar />
-        </div>
-    );
+class App extends Component { 
+    constructor(props){
+        super(props);
+
+        this.state={ videos:[] };
+
+        YTSearch({key:API_KEY,hi:'surfboards'},(videos)=>{
+            //this.setState({videos:data});
+            this.setState({videos}); //when name is smae 위 이름이랑
+        });
+        
+    }
+
+
+    render(){
+        return (
+            <div>
+                <SearchBar />
+                <VideoList videos={this.state.videos} />
+            </div>
+        );
+    }
 } 
 
 
